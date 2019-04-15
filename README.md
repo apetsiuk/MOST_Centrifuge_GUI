@@ -10,7 +10,7 @@ A Python-based software was developed to automatically measure the rotational sp
 centrifuge. Were utilized OpenCV library for segmentation and tracking a visual marker located on
 the centrifuge handle, and PyQt library for creating a guide user interface application (Figure 7).
 
-![alt text](images/most_screenshoot.png)
+![alt text](images/most_screenshot.png)
 
 The developed application allows to crop an arbitrary region of interest of the captured camera
 frame and set RGB thresholds for tracking the visual markers of any distinctive colors. It counts the
