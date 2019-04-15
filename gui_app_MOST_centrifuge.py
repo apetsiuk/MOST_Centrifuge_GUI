@@ -4,6 +4,7 @@
 *                Salil S. Sule, Aliaksei L. Petsiuk and Joshua M. Pearce                         *
 *                                                                                                *
 *                     Michigan Tech Open Sustainability Technology Lab                           * 
+*                                        April 2019                                              *
 *                                                                                                *
 *                                                                                                *
 * A camera-based GUI application to validate the rotational speed of the open source 3D          *
