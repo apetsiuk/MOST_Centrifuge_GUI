@@ -1,8 +1,8 @@
 ![alt text](images/Fig_0.jpg)
 
-# A camera-based GUI application to validate the rotational speed of an open source 3D printable centrifuge.
+# A camera-based GUI application for rotational velocity validation of an open source 3D printable centrifuge.
 
- >*The provided application is a part of an "Open Source Completely 3-D Printable Centrifuge" paper by Salil S. Sule, Aliaksei L. Petsiuk and Joshua M. Pearce.*
+ >*The given application is a part of an "Open Source Completely 3-D Printable Centrifuge" paper by Salil S. Sule, Aliaksei L. Petsiuk and Joshua M. Pearce.*
 <br/>
 
 As the working part of a centrifuge rotates at a speed of up to 2000 rpm, it may be difficult to track its motion since the majority of regular web cameras are operating at a frequency of 25-30 Hz. Thus, as the whole system represents a mechanical transmission with the fixed gear ratio, an indirect method was chosen to calculate the angular velocity of the tubes based on the speed of rotation of the centrifuge handle (Figure 1). A Python-based software was developed to automatically measure the rotational speed of the centrifuge. Were utilized OpenCV library for segmentation and tracking a visual marker located on the centrifuge handle, and PyQt library for creating a guide user interface application (Figure 2).
