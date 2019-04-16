@@ -49,11 +49,11 @@ revolution in seconds.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mask color marker using RGB thresholds <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;apply operations of opening and closing to remove noise after RGB masking <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;find the contours of the masked area <b/> 
- <br/> 
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **if** the traveler marker is detected **do:**  <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;find the centroid location of the color marker applying the method of moments <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;calculate the radius of rotation and the angle of the centrifuge arm <br/> 
- <br/> 
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **if** the angle is in a specified zero range **do:** <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;increase number of revolutions by one <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;update timer and compute the time period for one revolution  <br/> 
@@ -77,3 +77,26 @@ revolution in seconds.
 
 &nbsp; 
 <br/> &nbsp;
+
+
+
+while a camera is open or a video is reading do:
+---------------------------------------------------------------------------------------------------
+      get a single frame as an RGB image
+      crop the region of interest of the image frame
+      apply linear filtering to blur the cropped region
+      mask color marker using RGB thresholds
+      apply operations of opening and closing to remove noise after RGB masking
+      find the contours of the masked area
+             if the traveler marker is detected do:
+                  find the centroid location of the color marker applying the method of moments
+                  calculate the radius of rotation and the angle of the centrifuge arm
+                   if the angle is in a specified zero range do:
+                        increase number of revolutions by one
+                        update timer and compute the time period for one revolution
+                        calculate the tubes RPM
+                        calculate the tubes RCF
+                   end if
+             end if
+end while
+---------------------------------------------------------------------------------------------------
