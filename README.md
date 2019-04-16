@@ -22,8 +22,8 @@ The developed application allows to crop an arbitrary region of interest of the 
 
 The main computer vision algorithm is provided below. The RPM and RCF calculations are based on tracking the coordinates of the traveler marker located on the centrifuge handle. By applying the specified color thresholds and morphological operations of “opening” and “closing” to a cropped camera frame we can mask the marker as a single separated color region. To find the coordinates of its centroid we employ the method of moments, which will allow us to compute the centrifuge handle orientation relatively to the center of rotation.
 
-![alt text](images/Fig_3.png)
-**Figure 3.** A processed video frame
+![alt text](images/Fig_3.png) <br/> 
+**Figure 3.** A processed video frame 
 <br/>
 <br/>
 
