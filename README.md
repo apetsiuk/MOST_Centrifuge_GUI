@@ -42,46 +42,8 @@ revolution in seconds.
 **Input:** an image frame from a camera or a video sequence <br/>
 **Output:** RPM and RCF values for the test tubes <br/>
 - - - -
-**while** a camera is open or a video is reading **do:** <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get a single frame as an RGB image <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;crop the region of interest of the image frame <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;apply linear filtering to blur the cropped region <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mask color marker using RGB thresholds <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;apply operations of opening and closing to remove noise after RGB masking <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;find the contours of the masked area <b/> 
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **if** the traveler marker is detected **do:**  <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;find the centroid location of the color marker applying the method of moments <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;calculate the radius of rotation and the angle of the centrifuge arm <br/> 
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **if** the angle is in a specified zero range **do:** <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;increase number of revolutions by one <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;update timer and compute the time period for one revolution  <br/> 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;calculate the tubes RPM <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;calculate the tubes RCF <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **end if** <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **end if** <br/>
- **end while** <br/>
-- - - -
-
-<br/>
-
-![alt text](images/Fig_4.png)
-**Figure 4.** Relative Centrifugal Force as a function of radial velocity
-
-<br/>
-<br/>
-
-
-© 2019 by the authors. Submitted for possible open access publication under the terms and conditions of the Creative Commons Attribution (CC BY) license (http://creativecommons.org/licenses/by/4.0/). 
-
-&nbsp; 
-<br/> &nbsp;
-
-
-
 while a camera is open or a video is reading do:
----------------------------------------------------------------------------------------------------
+---
       get a single frame as an RGB image
       crop the region of interest of the image frame
       apply linear filtering to blur the cropped region
@@ -99,4 +61,21 @@ while a camera is open or a video is reading do:
                    end if
              end if
 end while
----------------------------------------------------------------------------------------------------
+---
+- - - -
+
+<br/>
+
+![alt text](images/Fig_4.png)
+**Figure 4.** Relative Centrifugal Force as a function of radial velocity
+
+<br/>
+<br/>
+
+
+© 2019 by the authors. Submitted for possible open access publication under the terms and conditions of the Creative Commons Attribution (CC BY) license (http://creativecommons.org/licenses/by/4.0/). 
+&nbsp; 
+<br/> &nbsp;
+
+
+
