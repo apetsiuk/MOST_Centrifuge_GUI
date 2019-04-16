@@ -49,10 +49,8 @@ revolution in seconds.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mask color marker using RGB thresholds <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;apply operations of opening and closing to remove noise after RGB masking <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;find the contours of the masked area <b/>
-
 <br/>
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **if** the traveler marker is detected **do:** <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; **if** the traveler marker is detected **do:**  <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;find the centroid location of the color marker applying the method of moments <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;calculate the radius of rotation and the angle of the centrifuge arm <br/>
 <br/>
