@@ -148,12 +148,12 @@ class App(QWidget):
         self._dynamic_ax.tick_params(axis='y',labelcolor=self.color)
         self.color = 'tab:blue'
         # uncomment the lines below in case if you need a second axis
-        self._dynamic_ax2 = self._dynamic_ax.twinx() # use the same x-axis for the self._dynamic_ax2
-        self._dynamic_ax2.set_ylabel('Relative Centrifugal Force, N',color=self.color)
-        self._dynamic_ax2.tick_params(axis='y',labelcolor=self.color)
+        #self._dynamic_ax2 = self._dynamic_ax.twinx() # use the same x-axis for the self._dynamic_ax2
+        #self._dynamic_ax2.set_ylabel('Relative Centrifugal Force, N',color=self.color)
+        #self._dynamic_ax2.tick_params(axis='y',labelcolor=self.color)
         self._timer = dynamic_canvas.new_timer(100, [(self._update_canvas, (), {})])
         self._timer.start()
-        t = np.linspace(0, 100, 120)
+        t = np.linspace(0, 100, 100)
         #------------------------------------------------------
         
         self.btn_matplotlib = QtWidgets.QPushButton('3D Fused Plot')
@@ -313,7 +313,7 @@ class App(QWidget):
     #------------------------ VARIABLES -------------------------
     slider_R_lower_value = 0 # defaults
     slider_G_lower_value = 12
-    slider_B_lower_value = 62
+    slider_B_lower_value = 55
 
     slider_R_upper_value = 44
     slider_G_upper_value = 100
@@ -329,7 +329,7 @@ class App(QWidget):
 
     
     spin_time = time.time() # for app timer
-    start_timer = 0 # for frame timer
+    start_timer = time.time() # for frame timer
     trace_markers_FLAG = 0 # button is not pressed
     
     azimuth = 0
@@ -340,7 +340,7 @@ class App(QWidget):
     prev_count = 0
     previous_time = 0
 
-    graph_x_size = 120
+    graph_x_size = 100
     graph_step = 0
     rpm2=np.zeros(graph_x_size) # to plot the graph
     rcf2=np.zeros(graph_x_size) # to plot the graph
@@ -486,7 +486,7 @@ class App(QWidget):
 
 #----------------------------------------------------------------------------------------------------------------------------
     def btn_OPEN_VID_click_function(self):
-        cap = cv2.VideoCapture('video/calibrate_4.avi')
+        cap = cv2.VideoCapture('video/v7.avi')
         #cap.set(cv2.CAP_PROP_FPS, 60)
         cap.set(cv2.CAP_PROP_FRAME_WIDTH, 800)
         cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 600)
@@ -506,7 +506,8 @@ class App(QWidget):
             ret, frame = cap.read()
             
             if ret==True:
-                crop = frame[self.Crop_X_Start:self.Crop_X_Start+self.Crop_Width, self.Crop_Y_Start:self.Crop_Y_Start+self.Crop_Height]
+                #crop = frame[self.Crop_X_Start:self.Crop_X_Start+self.Crop_Width, self.Crop_Y_Start:self.Crop_Y_Start+self.Crop_Height]
+                crop = frame.copy()
                 blur = cv2.blur(crop,(5,5))
                 # find the traveler
                 lowerB=np.array([int(self.slider_B_lower_value*2.55),int(self.slider_G_lower_value*2.55),int(self.slider_R_lower_value*2.55)])
@@ -514,7 +515,7 @@ class App(QWidget):
                 maskB=cv2.inRange(blur,lowerB,upperB)
                 # opening and closing
                 kernelOpen=np.ones((5,5))
-                kernelClose=np.ones((15,15))
+                kernelClose=np.ones((10,10))
 
                 maskOpenB=cv2.morphologyEx(maskB,cv2.MORPH_OPEN,kernelOpen)
                 maskCloseB=cv2.morphologyEx(maskOpenB,cv2.MORPH_CLOSE,kernelClose)
@@ -526,8 +527,8 @@ class App(QWidget):
                 cv2.addWeighted(maskCloseB_rgb, 0.4, output, 1-0.4,0, output)
 
                 # origin
-                cxo = 350
-                cyo = 309
+                cxo = 394
+                cyo = 401
 
                 if self.trace_markers_FLAG == 1:
                     self.start_timer = time.time()
@@ -539,11 +540,11 @@ class App(QWidget):
                         Mb = cv2.moments(cntB)
                         cxb = int(Mb['m10']/Mb['m00'])+self.Crop_X_Start
                         cyb = int(Mb['m01']/Mb['m00'])+self.Crop_Y_Start
-                        cv2.putText(output,("Angle       = {:.2f}".format(self.azimuth*180/np.pi)),(100,100),self.font,1,(255,255,255),2,cv2.LINE_AA)
+                        cv2.putText(output,("Angle       = {:.2f}".format(self.azimuth*180/np.pi)),(400,100),self.font,1,(255,255,255),2,cv2.LINE_AA)
                         #cv2.putText(output,("Timer  = {:.2f}".format(time.time()-self.start_timer)),(20,100),self.font,0.8,(255,255,255),2,cv2.LINE_AA)
-                        cv2.putText(output,("Revolutions = {:.0f}".format(self.rotations)),(100,150),self.font,1,(255,255,255),2,cv2.LINE_AA)
-                        cv2.putText(output,("Tubes RPM = {:.2f}".format(self.rpm)),(100,200),self.font,1,(255,255,255),2,cv2.LINE_AA)
-                        cv2.putText(output,("Tubes RCF  = {:.2f}".format(1.118*15*(self.rpm**2)*1e-6)),(100,250),self.font,1,(255,255,255),2,cv2.LINE_AA)
+                        cv2.putText(output,("Revolutions = {:.0f}".format(self.rotations)),(400,150),self.font,1,(255,255,255),2,cv2.LINE_AA)
+                        cv2.putText(output,("Tubes RPM = {:.2f}".format(self.rpm)),(400,200),self.font,1,(255,255,255),2,cv2.LINE_AA)
+                        cv2.putText(output,("Tubes RCF  = {:.2f}".format(1.118*15*(self.rpm**2)*1e-6)),(400,250),self.font,1,(255,255,255),2,cv2.LINE_AA)
                     else:
                         cxb = cxo
                         cyb = cxo
@@ -578,9 +579,9 @@ class App(QWidget):
                         self.azimuth=np.arcsin((cxb-cxo)/radius)+np.pi*3/2
 
                     # calculate RPM (values 0.85 and 9 have been calibrated experimentally)
-                    if np.round(self.azimuth,2) <= 0.85 and (self.count-self.prev_count)>9:
+                    #if np.round(self.azimuth,2) <= 0.85 and (self.count-self.prev_count)>9:
                     # calculate RPM (values 0.75 and 8 have been calibrated experimentally)
-                    #if np.round(azimuth,2) <= 0.75 and (count-prev_count)>8:
+                    if np.round(self.azimuth,2) <= 0.75 and (self.count-self.prev_count)>8:
                         self.count=0
                         self.rpm = 60*self.gear_ratio/(time.time()-self.previous_time)
                         self.rcf = 1.118*self.tube_length*self.rpm**2*1e-6
@@ -665,7 +666,7 @@ class App(QWidget):
         figure_1 = plt.figure('RCF(RPM) Function')
         plt.plot(self.rpm2,self.rcf2,'o',color='#0000FF') # experimental data
 
-        tt = np.linspace(0,10*self.graph_x_size,self.graph_x_size)
+        tt = np.linspace(0,20*self.graph_x_size,self.graph_x_size)
         plt.plot(tt,1.118*self.tube_length*tt**2*1e-6,color='#DC143C') # theoretical data
         plt.grid()
         plt.legend(['Experimental data','Theoretical calculation'])
@@ -685,8 +686,8 @@ class App(QWidget):
         self._dynamic_ax.plot(t,self.rpm2,color='#696969')
         self._dynamic_ax.fill_between(t,0,self.rpm2,facecolor='#696969')
         self._dynamic_ax.plot(0,0,color='#B0C4DE')
-        self._dynamic_ax2.plot(t,self.rcf2,color='#B0C4DE')
-        self._dynamic_ax2.fill_between(t,0,self.rcf2,facecolor='#B0C4DE')
+        #self._dynamic_ax2.plot(t,self.rcf2,color='#B0C4DE')
+        #self._dynamic_ax2.fill_between(t,0,self.rcf2,facecolor='#B0C4DE')
         self._dynamic_ax.axvline(x=self.rotations,linewidth=2,c='r')
         self._dynamic_ax.set_title('Centrifuge Spin Test')
         self._dynamic_ax.set_ylabel('Radial Velocity, rpm')
